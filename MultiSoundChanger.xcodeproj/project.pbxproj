@@ -3,13 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		4743EFAB1E91493B0032F5AA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4743EFAA1E91493B0032F5AA /* AppDelegate.swift */; };
 		6985C6FE251951F8003C2FDB /* OSD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6985C6FD251951F8003C2FDB /* OSD.framework */; };
-		D914CAC22698034D00FB55D2 /* ScrollableSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D914CAC12698034D00FB55D2 /* ScrollableSlider.swift */; };
+		D914CAC52698095C00FB55D2 /* SimplyCoreAudio in Frameworks */ = {isa = PBXBuildFile; productRef = D914CAC42698095C00FB55D2 /* SimplyCoreAudio */; };
+		D914CAC626993C5700FB55D2 /* ScrollableSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D914CAC12698034D00FB55D2 /* ScrollableSlider.swift */; };
 		E4FFDC0757FD125F92CC0F62 /* Pods_MultiSoundChanger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C34C05E9BD81D579A0C4957 /* Pods_MultiSoundChanger.framework */; };
 		F312C54E25B3741C00205846 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F373D8C02561D24600642274 /* Main.storyboard */; };
 		F312C55025B3742200205846 /* Volume.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F373D8BC2561D22000642274 /* Volume.storyboard */; };
@@ -64,6 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D914CAC52698095C00FB55D2 /* SimplyCoreAudio in Frameworks */,
 				6985C6FE251951F8003C2FDB /* OSD.framework in Frameworks */,
 				E4FFDC0757FD125F92CC0F62 /* Pods_MultiSoundChanger.framework in Frameworks */,
 			);
@@ -245,6 +247,9 @@
 			dependencies = (
 			);
 			name = MultiSoundChanger;
+			packageProductDependencies = (
+				D914CAC42698095C00FB55D2 /* SimplyCoreAudio */,
+			);
 			productName = DynamicsIllusion;
 			productReference = 4743EFA71E91493B0032F5AA /* MultiSoundChanger.app */;
 			productType = "com.apple.product-type.application";
@@ -274,6 +279,9 @@
 				Base,
 			);
 			mainGroup = 4743EF9E1E91493B0032F5AA;
+			packageReferences = (
+				D914CAC32698095C00FB55D2 /* XCRemoteSwiftPackageReference "SimplyCoreAudio" */,
+			);
 			productRefGroup = 4743EFA81E91493B0032F5AA /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -366,7 +374,7 @@
 				F373D8C82561D2B000642274 /* Extensions.swift in Sources */,
 				F392597C2631ACE700B7AD62 /* Runner.swift in Sources */,
 				F3433FCB25B36E16009AAE86 /* Images.swift in Sources */,
-				D914CAC22698034D00FB55D2 /* ScrollableSlider.swift in Sources */,
+				D914CAC626993C5700FB55D2 /* ScrollableSlider.swift in Sources */,
 				F3925975262F2B8000B7AD62 /* ApplicationController.swift in Sources */,
 				F373D8C62561D2A600642274 /* Audio.swift in Sources */,
 				F37C2ED1256AAA4C001C3D36 /* Strings.swift in Sources */,
@@ -504,7 +512,8 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
@@ -524,8 +533,11 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = MultiSoundChanger/Other/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.rlxone.multisoundchanger;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -550,8 +562,11 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = MultiSoundChanger/Other/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.rlxone.multisoundchanger;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -583,6 +598,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D914CAC32698095C00FB55D2 /* XCRemoteSwiftPackageReference "SimplyCoreAudio" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/rnine/SimplyCoreAudio";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D914CAC42698095C00FB55D2 /* SimplyCoreAudio */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D914CAC32698095C00FB55D2 /* XCRemoteSwiftPackageReference "SimplyCoreAudio" */;
+			productName = SimplyCoreAudio;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 4743EF9F1E91493B0032F5AA /* Project object */;
 }
