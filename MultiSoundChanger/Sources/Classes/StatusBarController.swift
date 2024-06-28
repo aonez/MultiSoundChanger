@@ -152,7 +152,7 @@ final class StatusBarControllerImpl: StatusBarController {
             item.target = self
             item.tag = Int(device.id)
             
-            if device.id == defaultDevice?.id {
+            if let defaultDeviceId = defaultDevice?.id, device.id == defaultDeviceId {
                 item.state = .on
                 selectDevice(device: device.id)
             }
@@ -171,6 +171,8 @@ final class StatusBarControllerImpl: StatusBarController {
             new_device.isDefaultInputDevice = true
         }
         
+        audioManager.selectDevice(deviceID: device)
+
         guard let volume = audioManager.getSelectedDeviceVolume() else {
             return
         }
