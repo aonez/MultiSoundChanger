@@ -139,7 +139,7 @@ final class StatusBarControllerImpl: StatusBarController {
     }
     
     private func setOutputDeviceList(for menu: NSMenu) {
-        let devices = simplyCA.allOutputDevices.filter { !$0.isHidden }.filter { $0.name != "ZoomAudioDevice" }
+        let devices = simplyCA.allOutputDevices.filter { !$0.isHidden }.filter { $0.name != "ZoomAudioDevice" && $0.name != "Microsoft Teams Audio" }
         
         let defaultDevice = simplyCA.defaultOutputDevice
         
