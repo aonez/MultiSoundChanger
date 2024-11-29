@@ -1,4 +1,4 @@
-whitelist_rules:
+only_rules:
     - attributes
     - block_based_kvo
     - class_delegate_protocol
