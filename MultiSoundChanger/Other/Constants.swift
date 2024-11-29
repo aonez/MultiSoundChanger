@@ -51,5 +51,13 @@ enum Constants {
         static func selectedDeviceVolume(volume: String) -> String {
             return "Selected device volume: \(volume)"
         }
+        
+        static func deviceDoesNotSupportVolume(deviceName: String) -> String {
+            return "The device \(deviceName) does not support volume control"
+        }
+        
+        static func deviceDoesNotSupportMute(deviceName: String) -> String {
+            return "The device \(deviceName) does not support mute control"
+        }
     }
 }

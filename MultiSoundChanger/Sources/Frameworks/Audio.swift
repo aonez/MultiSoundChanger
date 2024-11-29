@@ -74,6 +74,29 @@ final class AudioImpl: Audio {
         return deviceType == kAudioDeviceTransportTypeAggregate
     }
     
+    func isAudioDevicePossibleDisplay(deviceID: AudioDeviceID) -> Bool {
+        var propertyAddress = AudioObjectPropertyAddress(
+            mSelector: kAudioDevicePropertyTransportType,
+            mScope: kAudioObjectPropertyScopeGlobal,
+            mElement: kAudioObjectPropertyElementMaster
+        )
+        
+        var transportType: UInt32 = 0
+        var size = UInt32(MemoryLayout<UInt32>.size)
+        let status = AudioObjectGetPropertyData(deviceID, &propertyAddress, 0, nil, &size, &transportType)
+        
+        if status == noErr {
+            switch transportType {
+            case kAudioDeviceTransportTypeHDMI, kAudioDeviceTransportTypeDisplayPort:
+                return true
+            default:
+                return false
+            }
+        } else {
+            return false
+        }
+    }
+    
     func isDeviceMuted(deviceID: AudioDeviceID) -> Bool {
         var mutedValue: UInt32 = 0
         var propertySize = UInt32(MemoryLayout<UInt32>.size)
@@ -118,13 +141,26 @@ final class AudioImpl: Audio {
         var size = UInt32(0)
         
         AudioObjectGetPropertyDataSize(deviceID, &masterLevelPropertyAddress, 0, nil, &size)
-        AudioObjectSetPropertyData(deviceID, &masterLevelPropertyAddress, 0, nil, size, &masterLevel)
+        let statusMaster = AudioObjectSetPropertyData(deviceID, &masterLevelPropertyAddress, 0, nil, size, &masterLevel)
         
         AudioObjectGetPropertyDataSize(deviceID, &leftLevelPropertyAddress, 0, nil, &size)
-        AudioObjectSetPropertyData(deviceID, &leftLevelPropertyAddress, 0, nil, size, &leftLevel)
+        let statusLeft = AudioObjectSetPropertyData(deviceID, &leftLevelPropertyAddress, 0, nil, size, &leftLevel)
         
         AudioObjectGetPropertyDataSize(deviceID, &rightLevelPropertyAddress, 0, nil, &size)
-        AudioObjectSetPropertyData(deviceID, &rightLevelPropertyAddress, 0, nil, size, &rigthLevel)
+        let statusRight = AudioObjectSetPropertyData(deviceID, &rightLevelPropertyAddress, 0, nil, size, &rigthLevel)
+        
+        if statusMaster != noErr && statusLeft != noErr && statusRight != noErr {
+            let isVolumeSupported = (AudioObjectHasProperty(deviceID, &masterLevelPropertyAddress) ||
+                                     AudioObjectHasProperty(deviceID, &leftLevelPropertyAddress) ||
+                                     AudioObjectHasProperty(deviceID, &rightLevelPropertyAddress))
+            if !isVolumeSupported {
+                if isAudioDevicePossibleDisplay(deviceID: deviceID) {
+                    BetterDisplay.setVolume(masterLevel, deviceName: getDeviceName(deviceID: deviceID))
+                } else {
+                    Logger.debug(Constants.InnerMessages.deviceDoesNotSupportVolume(deviceName: getDeviceName(deviceID: deviceID)))
+                }
+            }
+        }
     }
     
     func setDeviceMute(deviceID: AudioDeviceID, isMute: Bool) {
@@ -136,7 +172,18 @@ final class AudioImpl: Audio {
             mScope: AudioObjectPropertyScope(kAudioDevicePropertyScopeOutput),
             mElement: AudioObjectPropertyElement(kAudioObjectPropertyElementMaster))
         
-        AudioObjectSetPropertyData(deviceID, &propertyAddress, 0, nil, propertySize, &mutedValue)
+        let status = AudioObjectSetPropertyData(deviceID, &propertyAddress, 0, nil, propertySize, &mutedValue)
+        
+        if status != noErr {
+            let isMuteSupported = (AudioObjectHasProperty(deviceID, &propertyAddress))
+            if !isMuteSupported {
+                if isAudioDevicePossibleDisplay(deviceID: deviceID) {
+                    BetterDisplay.mute(isMute, deviceName: getDeviceName(deviceID: deviceID))
+                } else {
+                    Logger.debug(Constants.InnerMessages.deviceDoesNotSupportMute(deviceName: getDeviceName(deviceID: deviceID)))
+                }
+            }
+        }
     }
     
     func setOutputDevice(newDeviceID: AudioDeviceID) {

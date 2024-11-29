@@ -29,6 +29,7 @@
 		F3925975262F2B8000B7AD62 /* ApplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3925974262F2B8000B7AD62 /* ApplicationController.swift */; };
 		F3925979262F2F9F00B7AD62 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3925978262F2F9F00B7AD62 /* Logger.swift */; };
 		F392597C2631ACE700B7AD62 /* Runner.swift in Sources */ = {isa = PBXBuildFile; fileRef = F392597B2631ACE700B7AD62 /* Runner.swift */; };
+		F7E845072CF9F96D0001647F /* BetterDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7E845062CF9F96D0001647F /* BetterDisplay.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +59,7 @@
 		F3925974262F2B8000B7AD62 /* ApplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationController.swift; sourceTree = "<group>"; };
 		F3925978262F2F9F00B7AD62 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		F392597B2631ACE700B7AD62 /* Runner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Runner.swift; sourceTree = "<group>"; };
+		F7E845062CF9F96D0001647F /* BetterDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetterDisplay.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -224,6 +226,7 @@
 			children = (
 				F3925978262F2F9F00B7AD62 /* Logger.swift */,
 				F392597B2631ACE700B7AD62 /* Runner.swift */,
+				F7E845062CF9F96D0001647F /* BetterDisplay.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -381,6 +384,7 @@
 				F373D8B52561D1A600642274 /* MediaManager.swift in Sources */,
 				F373D8B42561D1A600642274 /* AudioManager.swift in Sources */,
 				F373D8B32561D1A600642274 /* StatusBarController.swift in Sources */,
+				F7E845072CF9F96D0001647F /* BetterDisplay.swift in Sources */,
 				4743EFAB1E91493B0032F5AA /* AppDelegate.swift in Sources */,
 				F373D8BF2561D22000642274 /* VolumeViewController.swift in Sources */,
 				F3925979262F2F9F00B7AD62 /* Logger.swift in Sources */,
